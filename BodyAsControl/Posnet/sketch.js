@@ -49,7 +49,7 @@ function draw() {
   drawPoint();
   //particle
  for (let i = 0; i < 5; i++) {
-    let p = new Particle(x=keypoints1x,y=keypoints1y);
+    let p = new Particle(keypoints1x,keypoints1y);
     particles.push(p);
   }
   for (let i = particles.length - 1; i >= 0; i--) {

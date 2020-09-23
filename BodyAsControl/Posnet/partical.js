@@ -1,12 +1,11 @@
 
 class Particle {
-  constructor() {
-  	let x;
-  	let y;
-    this.x = 300;
-    this.y = 380;
-    this.vx = random(-10, 10);
-    this.vy = random(5, 5);
+  constructor(x,y) {
+  	
+    this.x = x;
+    this.y = y;
+    this.vx = random(-1, 1);
+    this.vy = random(-5, -1);
     this.alpha = 255;
   }
 
@@ -19,8 +18,8 @@ class Particle {
     //this.y += this.vy;
     //this.alpha -= 5;
 
-    x += this.vx;
-    y += this.vy;
+    this.x += this.vx;
+    this.y += this.vy;
     this.alpha -= 5;
 
 
@@ -31,6 +30,6 @@ class Particle {
     //stroke(255);
     fill(255, this.alpha);
     //ellipse(this.x, this.y, 16);
-    ellipse(x, y, 16);
+    ellipse(this.x, this.y, 16);
   }
 }
