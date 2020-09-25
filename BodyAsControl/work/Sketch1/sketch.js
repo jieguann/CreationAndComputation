@@ -91,11 +91,16 @@ function draw() {
   */
   
   push();
-  tint(100,0,100, 50);
+  tint(50,0,100, 50);
   image(video, 0, 0, width, height);
   pop();
+  
 
+  push();
+  //tint(10,127);
   image(particlesG,0,0,width,height);
+  pop();
+
   drawPoint();
   
   drawParticle();
