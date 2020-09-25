@@ -60,7 +60,7 @@ function setup() {
   flowfield = new Array(cols * rows);
 
 
-for(var i =0; i<500; i++){
+for(var i =0; i<1000; i++){
   particles[i] = new Particle();
 }
 
@@ -91,7 +91,7 @@ function draw() {
   */
   
   push();
-  tint(100,0,200, 220);
+  tint(100,0,100, 50);
   image(video, 0, 0, width, height);
   pop();
 
