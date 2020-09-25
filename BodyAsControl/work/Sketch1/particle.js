@@ -1,10 +1,10 @@
 function Particle(){
-	this.strokeAValue = 0;
-	this.strokeColor = 25;
+	this.strokeAValue = 200;
+	this.strokeColor = 200;
 	this.pos = createVector(random(width),random(height));
 	this.vel = createVector(0,0);
 	this.acc = createVector(0,0);
-	this.maxspeed = 3;
+	this.maxspeed = 4;
 	this.prevPos = this.pos.copy();
 
 
@@ -28,9 +28,9 @@ function Particle(){
 		this.acc.add(force);
 	}
 
-	this.show = function(strokeColorR,strokeColorG,strokeColorB,strokeAValue){
+	this.show = function(g,strokeColorR,strokeColorG,strokeColorB,strokeAValue){
 		//noFill();
-		
+		push();
 		stroke(strokeColorR,strokeColorG,strokeColorB, this.strokeAValue);
 
 		// this.strokeColor =this.strokeColor + 1;
@@ -40,7 +40,12 @@ function Particle(){
 		// }
 		strokeWeight(5);
 		line(this.pos.x,this.pos.y, this.prevPos.x, this.prevPos.y);
+        //g.clear();
+        pop();
 		this.updatePrev();
+
+		
+		
 
 
 	}
@@ -48,7 +53,7 @@ function Particle(){
     
 
 	this.edges = function(){
-		this.strokeAValue = 255;
+		this.strokeAValue = 200;
         if (this.pos.x > width) {
         	this.pos.x = 0;
         	this.updatePrev;

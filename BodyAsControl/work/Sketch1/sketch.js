@@ -16,6 +16,7 @@ var offz = 0;
 var particles = [];
 
 var flowfield = [];
+let particlesG;
 
 
 //posnet
@@ -33,6 +34,7 @@ var keypoints1y;
 
 function setup() {
   createCanvas(1080, 1080);
+  particlesG = createGraphics(1080,1080);
   //colorMode(HSB, 255);
   //particle
 
@@ -88,10 +90,12 @@ function draw() {
   drawSkeleton();
   */
   
-  
-tint(100,0,200, 220);
+  push();
+  tint(100,0,200, 220);
   image(video, 0, 0, width, height);
-  
+  pop();
+
+  image(particlesG,0,0,width,height);
   drawPoint();
   
   drawParticle();
@@ -173,7 +177,7 @@ for(var i=0; i < particles.length; i++){
   particles[i].follow(flowfield);
     particles[i].update();
     particles[i].edges();
-    particles[i].show(noise(i+r)*255,noise(i+g)*255,0,noise(i)*255 );
+    particles[i].show(particlesG, noise(i+r)*255,noise(i+g)*255,0,0 );
     r += 1;
     g += 1000;
     b += 1;
