@@ -1,9 +1,4 @@
 // Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/17WoOqgXsRM
-
-
 //end
 let noiseMax = 0.01;
 let goal = 5;
