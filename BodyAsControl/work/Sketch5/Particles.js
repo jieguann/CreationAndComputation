@@ -7,8 +7,8 @@ class Particle {
     this.y=y;
     this.startX = 300;
     this.startY = 380;
-    this.vx = random(-2, 2);
-    this.vy = random(-4, 0);
+    this.vx = random(-mTD, mTD);
+    this.vy = random(-mTD, mTD);
     this.alpha = 255;
     this.r = 0;
     this.rx=0;
@@ -20,17 +20,13 @@ class Particle {
     return this.alpha < 0;
   }
 
-  update(t) {
-
-
+  update() {
     this.x += this.vx;
-    this.y += this.vy
+    this.y += this.vy;
     this.alpha -= 5;
 
-    this.r = noise(this.r+this.rx)*40;
+    this.r = noise(this.r+this.rx)*25
     this.rx += 1;
-
-    //print(t);
 
 
 
@@ -43,7 +39,6 @@ class Particle {
     let xS= random(0,this.scalar*sin(this.angle));
     let yS= random(0,this.scalar*sin(this.angle));
 
-    //ellipse(this.x+xS, this.y+yS, this.r);
-    ellipse(this.x, this.y, this.r);
+    ellipse(this.x+xS, this.y+yS, this.r);
   }
 }

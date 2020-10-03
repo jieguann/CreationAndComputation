@@ -1,15 +1,17 @@
-//https://thecodingtrain.com/CodingChallenges/001-starfield.html
+// https://kylemcdonald.github.io/cv-examples/
+// https://github.com/kylemcdonald/AppropriatingNewTechnologies/wiki/Week-2
 
+let particlesN;
+const globe = [];
+const r = 200;
+const total = 25;
+let angleX = 0;
+let angleY = 0;
 
 
 particles = [];
-let stars = [];
-let ufo;
 
-let speed;
-let speedS;
-
-var capture;
+let capture;
 var tracker
 var w = 640,
     h = 480;
@@ -21,13 +23,8 @@ var smile;
 var mTD;
 let pN;
 
-// function preload() {
-//   ufo = loadImage('UFO.png');
-// }
-
-
 function setup() {
-//image(ufo, 0, 0);
+
 
     capture = createCapture({
         audio: false,
@@ -51,8 +48,23 @@ function setup() {
 
     angleMode(DEGREES);
 
-    for (let i = 0; i < 800; i++) {
-    stars[i] = new Star();
+
+
+    //shere
+    noFill();
+  strokeWeight(2);
+  stroke(200);
+
+  for (let i = 0; i < total + 1; i++) {
+    globe[i] = [];
+    const lat = map(i, 0, total, 0, PI);
+    for (let j = 0; j < total + 1; j++) {
+      const lon = map(j, 0, total, 0, TWO_PI);
+      const x = r * sin(lat) * cos(lon);
+      const y = r * sin(lat) * sin(lon);
+      const z = r * cos(lat);
+      globe[i][j] = createVector(x, y, z);
+    }
   }
 }
 
@@ -62,9 +74,13 @@ function draw() {
     
 
   push();
-  tint(50);
+  //tint(43, 15, 255);
   image(capture, 0, 0, w, h);
   pop();
+  // noStroke();
+  // ambientMaterial(255);
+  // texture(capture);
+  // plane(w,h);
 
 
     positions = tracker.getCurrentPosition();
@@ -101,70 +117,62 @@ function draw() {
         // rect(20, 20, smile * 3, 20);
 
         // uncomment for a surprise
-        drawRect();
+        // noStroke();
+        let cR;
 
-        noStroke();
-        fill(255, 0, 0);
+        let trigerS;
+
+        if(positions[62][1]>(height-height/3)){
+            //fill(0, 255, 255,100);
+            cR = 0;
+            //trigerS = 2;
+            drawParticles(positions[62][0], positions[62][1]+20,trigerS);
+
+        }
+        else{
+
+            cR =255;
+            //trigerS = 1;
+            
+
+        }
+
+
+        fill(cR, 255, 255,100);
         //ellipse(positions[62][0], positions[62][1], 50, 50);
-        rect(width/2-15, map(positions[62][1],0,height,height/4,height-height/4), 50, 20);
-        speed = map(map(positions[62][1],0,height,height/4,height-height/4),height/4,height-height/4,50,0);
-        //print(speed);
-        
-        //speed = map(mouseX, 0, width, 0, 50);
+
+        //drawParticles(positions[62][0], positions[62][1],trigerS);
+        //print(trigerS);
 
         //print(mouthLeft.dist(mouthRight),smile,mTD);
-        
-        drawStar();
-
-
     }
 
     //drawParticles();
-    //speed = 10;
-    //drawStar();
-
-
-    
+    fill(0, 51, 204,150);
+    noStroke();
+    rect(0,h/1.5,w,h/1.5);
     
 }
 
 
-function drawStar() {
-  //speed = map(mouseX, 0, width, 0, 50);
-  //background(0);
-  //speedS = speed;
-  //speed = 10;
+function drawParticles(x,y,t){
+    print(t)
+    for (i = 0; i < 1; i++) {
+    let p = new Particle(x,y);
+    //print(particlesN);
 
-  translate(width / 2, height / 2);
-  for (let i = 0; i < stars.length; i++) {
-    stars[i].update();
-    stars[i].show();
+    particles.push(p);
+  }
+
+
+
+  for (let i = particles.length - 1; i >= 0; i--) {
+    particles[i].update(t);
+    particles[i].show();
+    if (particles[i].finished()) {
+      // remove this particle
+      particles.splice(i, 1); 
+    }
   }
 }
-
-function drawRect(){
-  stroke(255, 0, 0);
-  strokeWeight(3);
-  fill(255,255,0,100);
-  rect(width/2,height/3,20,height/2)
-}
-
-
-
-
-// function drawParticles(){
-    
-//     for (let i = 0; i < pN; i++) {
-//     let p = new Particle(middlePointX,middlePointY);
-//     particles.push(p);
-//   }
-//   for (let i = particles.length - 1; i >= 0; i--) {
-//     particles[i].update();
-//     particles[i].show();
-//     if (particles[i].finished()) {
-//       // remove this particle
-//       particles.splice(i, 1);
-//     }
-//   }
-// }
 
